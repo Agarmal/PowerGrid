@@ -36,6 +36,12 @@ allprojects {
 		maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven" } // Forge Config API Port
 //		maven { url = "https://maven.ithundxr.dev/snapshots" } // Registrate
 		maven { url = "https://maven.tterrag.com/" } // Registrate
+		maven { // CC: Tweaked
+			url = "https://maven.squiddev.cc"
+			content {
+				includeGroup("cc.tweaked")
+			}
+		}
 
 		maven {
 			url = "https://maven.createmod.net"
@@ -305,6 +311,9 @@ dependencies {
 	testImplementation("org.ejml:ejml-dsparse:0.44.0")
 
 	modApi "dev.architectury:architectury:${project.architectury_api_version}"
+
+	compileOnly "cc.tweaked:cc-tweaked-${minecraft_version}-common-api:${cc_tweaked_version}"
+	compileOnly "cc.tweaked:cc-tweaked-${minecraft_version}-core-api:${cc_tweaked_version}"
 
 	annotationProcessor(implementation("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
 }

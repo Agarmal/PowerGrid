@@ -41,6 +41,12 @@ dependencies {
     compileOnly("io.github.llamalad7:mixinextras-common:${mixin_extras_version}")
     annotationProcessor(implementation(include("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")))
 
+    // Computer Craft
+    modCompileOnly "cc.tweaked:cc-tweaked-${minecraft_version}-forge-api:${cc_tweaked_version}"
+    if(cc_tweaked_enable.toBoolean()) {
+        modRuntimeOnly "cc.tweaked:cc-tweaked-${minecraft_version}-forge:${cc_tweaked_version}"
+    }
+
     shadowCommon(project(path: rootProject.path, configuration: "transformProductionForge")) { transitive false }
 
     forgeRuntimeLibrary "org.ejml:ejml-core:0.44.0"

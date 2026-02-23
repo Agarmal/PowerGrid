@@ -430,25 +430,25 @@ public class GraphedElectricalNetwork extends ElectricalNetwork {
         preparing = true;
         var cleanNodes = new HashSet<IElectricNode>();
         var changed = true;
-        while(changed) {
-            if(deferredNodeCheck.isEmpty())
-                break;
-            var iter = deferredNodeCheck.iterator();
-            IElectricNode node;
-            boolean added;
-            do {
-                node = iter.next();
-            } while(!(added = cleanNodes.add(node)) && iter.hasNext());
-            if(!added)
-                break;
-
-            changed = false;
-            var affected = checkSeries(node);
-            if(affected != null) {
-                changed = true;
-                deferredNodeCheck.removeAll(affected);
-            }
-        }
+//        while(changed) {
+//            if(deferredNodeCheck.isEmpty())
+//                break;
+//            var iter = deferredNodeCheck.iterator();
+//            IElectricNode node;
+//            boolean added;
+//            do {
+//                node = iter.next();
+//            } while(!(added = cleanNodes.add(node)) && iter.hasNext());
+//            if(!added)
+//                break;
+//
+//            changed = false;
+//            var affected = checkSeries(node);
+//            if(affected != null) {
+//                changed = true;
+//                deferredNodeCheck.removeAll(affected);
+//            }
+//        }
         for(var node : deferredNodeCheck) {
             checkConnectivity(node, null);
         }
