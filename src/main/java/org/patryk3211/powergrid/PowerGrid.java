@@ -43,6 +43,7 @@ import org.patryk3211.powergrid.electricity.heater.HeaterFanProcessingTypes;
 import org.patryk3211.powergrid.electricity.light.string.StringLightCordRecipe;
 import org.patryk3211.powergrid.electricity.sim.ElectricalNetwork;
 import org.patryk3211.powergrid.electricity.sim.solver.NativeMNA;
+import org.patryk3211.powergrid.equipment.BoostRecipe;
 import org.patryk3211.powergrid.equipment.thunder.LightningRodMovementBehaviour;
 import org.patryk3211.powergrid.kinetics.punchcard.PunchCardReaderBlockEntity;
 import org.patryk3211.powergrid.utility.Lang;
@@ -84,6 +85,7 @@ public class PowerGrid {
 		LifecycleEvent.SERVER_LEVEL_UNLOAD.register(GlobalElectricNetworks::unloadWorld);
 		CommandRegistrationEvent.EVENT.register(ModdedCommands::register);
 		PlayerEvent.PLAYER_JOIN.register(PowerGrid::playerJoin);
+		LifecycleEvent.SETUP.register(PowerGrid::setup);
 	}
 
 	private static void playerJoin(ServerPlayer player) {
@@ -131,6 +133,10 @@ public class PowerGrid {
 		MovementBehaviour.REGISTRY.register(Blocks.LIGHTNING_ROD, new LightningRodMovementBehaviour());
 	}
 
+	private static void setup() {
+		ModdedAdvancements.register();
+	}
+
 	public static ResourceLocation asResource(String path) {
 		return new ResourceLocation(MOD_ID, path);
 	}
@@ -150,6 +156,8 @@ public class PowerGrid {
 		RECIPE_TYPES.register(magnetizing.getId(), magnetizing::getType);
 
 		RECIPE_SERIALIZERS.register("crafting_special_string_light_cord", () -> StringLightCordRecipe.SERIALIZER);
+
+		RECIPE_SERIALIZERS.register("boost_recipe", () -> BoostRecipe.SERIALIZER);
 	}
 
 	@ExpectPlatform
